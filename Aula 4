@@ -1,0 +1,40 @@
+cd /etc/hosts
+sudo nano /etc/hosts
+Dentro do nano editamos alguns arquivos 
+  1 - Apagamos o primeiro IP (primeria linha dentro do nano )
+  2 - Editamos o nome site2(1) para localhost (segunda linha dentro do nano )
+  3 - Apagamos as duas ultimas linhas dentro do nano 
+  4 - Salvamos ( Ctlr + O ) 
+sudo apt-get update 
+sudo apt-get install bind9
+sudo /etc/inti.d/named status
+Em seguida abrimos as configurações da rede cabeada ( dentro da sua maquina virtual )
+  1 - Entramos em Redes 
+  2 - Entramos em config da cabeada 
+  3 - IPV4   
+  4 - Editamos para manual 
+  5 - Editamos os endereços e mascaras 
+  6 - IP - 192.168.10.0  
+  7 - Mascara - 255.255.255.0
+  8 - Gateway - 192.168.0.1
+Novamente no pronpt digitamos os comandos 
+ip a 
+cd /etc/bind
+ls 
+sudo cp named.conf.local named.conf.localOLD
+ls
+sudo nano named.conf.local
+Dentro do nano acrescentamos algumas lnhas 
+  1 - //zona direta 
+  2 - zone "ifrn.com" {
+              type master;
+                file "/etc/bind/db.ifrn.com";
+  }
+  3 - //zona Reversa 
+zone "192.168.0.-in.addr.arpa"{
+      type master;
+      file -/etc/bind/db.reverso10";
+    
+  };
+
+lembrar de salvar 
